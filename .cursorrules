@@ -1,0 +1,59 @@
+{
+  "ignore": [
+    "node_modules/**",
+    ".git/**",
+    ".next/**",
+    "dist/**",
+    "build/**",
+    "*.log",
+    "*.lock",
+    "*.map",
+    ".DS_Store"
+  ],
+  "search": {
+    "exclude": [
+      "node_modules/**",
+      ".next/**",
+      "dist/**",
+      "build/**",
+      "*.log",
+      "*.lock",
+      "*.map",
+      ".DS_Store"
+    ]
+  },
+  "ai": {
+    "context": {
+      "include": [
+        "app/**",
+        "components/**",
+        "lib/**",
+        "contexts/**",
+        "supabase/**"
+      ],
+      "exclude": [
+        "node_modules/**",
+        ".next/**",
+        "dist/**",
+        "build/**"
+      ]
+    },
+    "preferences": {
+      "typescript": true,
+      "react": true,
+      "nextjs": true,
+      "tailwind": true
+    }
+  },
+  "formatting": {
+    "typescript": true,
+    "react": true,
+    "tailwind": true
+  },
+  "analysis": {
+    "typescript": true,
+    "react": true,
+    "nextjs": true,
+    "tailwind": true
+  }
+} 
