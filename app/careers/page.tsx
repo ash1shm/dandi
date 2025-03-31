@@ -1,5 +1,1 @@
-import DefaultPage from '../components/DefaultPage';
-
-export default function CareersPage() {
-  return <DefaultPage />;
-} 
+import DefaultPage from "../components/DefaultPage"; export default function Page() { return <DefaultPage />; }
