@@ -25,8 +25,8 @@ export default function Sidebar() {
   }, [pathname]);
 
   const menuItems = [
-    { name: 'Dashboard', icon: HomeIcon, href: '/dashboards' },
-    { name: 'API Keys', icon: KeyIcon, href: '/dashboards' },
+    { name: 'Dashboard', icon: HomeIcon, href: '/dashboard' },
+    { name: 'API Keys', icon: KeyIcon, href: '/api-keys' },
     { name: 'Profile', icon: UserIcon, href: '/profile' },
     { name: 'Settings', icon: Cog6ToothIcon, href: '/settings' },
   ];
