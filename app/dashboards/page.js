@@ -143,24 +143,26 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-4 lg:p-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-        <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-          <KeyIcon className="h-6 w-6 lg:h-8 lg:w-8 text-blue-600" />
-          API Keys Dashboard
-        </h1>
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex items-center gap-2">
+          <KeyIcon className="h-6 w-6 text-blue-600" />
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+            API Keys Dashboard
+          </h1>
+        </div>
         <button
           onClick={handleSignOut}
-          className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white flex items-center gap-1"
+          className="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
         >
           <ArrowRightOnRectangleIcon className="h-4 w-4" />
           Sign Out
         </button>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <div className="p-4 lg:p-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex flex-col sm:flex-row gap-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex items-center gap-4">
             <div className="flex-1 relative">
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               <input
@@ -168,23 +170,21 @@ export default function Dashboard() {
                 placeholder="Search keys..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
+                className="w-full pl-10 pr-4 py-2 border rounded-lg bg-white dark:bg-gray-900 dark:border-gray-700"
               />
             </div>
-            <div>
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="w-full sm:w-auto px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 appearance-none bg-white dark:bg-gray-800"
-              >
-                <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="revoked">Revoked</option>
-              </select>
-            </div>
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="px-4 py-2 border rounded-lg bg-white dark:bg-gray-900 dark:border-gray-700"
+            >
+              <option value="all">All Status</option>
+              <option value="active">Active</option>
+              <option value="revoked">Revoked</option>
+            </select>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               <PlusIcon className="h-5 w-5" />
               Create New API Key
@@ -202,44 +202,43 @@ export default function Dashboard() {
         />
       </div>
 
-      <Modal
-        isOpen={showCreateModal}
-        onClose={() => setShowCreateModal(false)}
-        title="Create New API Key"
-        icon={PlusIcon}
-        onConfirm={handleCreateKey}
-        confirmText="Create"
-      >
-        <input
-          type="text"
-          value={newKeyName}
-          onChange={(e) => setNewKeyName(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && newKeyName.trim()) {
-              handleCreateKey();
-            }
-          }}
-          placeholder="Enter API Key Name"
-          className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
-        />
-      </Modal>
+      {/* Modals */}
+      {showCreateModal && (
+        <Modal
+          title="Create New API Key"
+          onClose={() => setShowCreateModal(false)}
+          onConfirm={handleCreateKey}
+          confirmText="Create"
+        >
+          <input
+            type="text"
+            placeholder="Enter key name"
+            value={newKeyName}
+            onChange={(e) => setNewKeyName(e.target.value)}
+            className="w-full px-4 py-2 border rounded-lg dark:bg-gray-900 dark:border-gray-700"
+          />
+        </Modal>
+      )}
 
-      <Modal
-        isOpen={showEditModal}
-        onClose={() => setShowEditModal(false)}
-        title="Edit API Key"
-        icon={PencilIcon}
-        onConfirm={handleUpdateKey}
-        confirmText="Update"
-      >
-        <input
-          type="text"
-          value={editingKey?.name || ''}
-          onChange={(e) => setEditingKey({ ...editingKey, name: e.target.value })}
-          placeholder="Enter API Key Name"
-          className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
-        />
-      </Modal>
+      {showEditModal && (
+        <Modal
+          title="Edit API Key"
+          onClose={() => {
+            setShowEditModal(false);
+            setEditingKey(null);
+          }}
+          onConfirm={handleUpdateKey}
+          confirmText="Update"
+        >
+          <input
+            type="text"
+            placeholder="Enter key name"
+            value={editingKey?.name || ''}
+            onChange={(e) => setEditingKey({ ...editingKey, name: e.target.value })}
+            className="w-full px-4 py-2 border rounded-lg dark:bg-gray-900 dark:border-gray-700"
+          />
+        </Modal>
+      )}
     </div>
   );
 } 
